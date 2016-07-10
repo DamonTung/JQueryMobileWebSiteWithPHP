@@ -1,0 +1,17 @@
+<html>
+<head>
+<meta charset="UTF-8"/>
+	<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+抱歉，本页面仅支持手机端，请用手机访问：<a id="mobile_url"></a>
+</body>
+<script>
+	var origin = location.origin;
+	var pathname = location.pathname;
+	var url = origin + pathname + '/../mobile.html';
+	var a = document.getElementById("mobile_url");
+	a.href = url;
+	a.innerHTML = a.href;
+</script>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>管理中心 - banner数据列表 </title>
+  <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="../view/admin/styles/general.css" rel="stylesheet" type="text/css" />
+<link href="../view/admin/styles/main.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<h1>
+<span class="action-span"><a href="bannersadd.php">添加新banner数据</a></span>
+  <span class="action-span1"><a href="#">管理中心</a> </span><span id="search_id" class="action-span1"> - 数据列表 </span>
+<div style="clear:both"></div>
+</h1>
+<form method="post" action="" name="listForm" >
+
+  <div class="list-div" id="listDiv">
+<table cellpadding="3" cellspacing="1">
+  <tr>
+    <th>编号</th>
+    <th>标题</th>
+    <th>链接</th>
+    <th>上线</th>
+    <th>操作</th>
+    <th>添加时间</th>
+  <tr>
+    <?php foreach($bannerslist as $value){ ?>
+      <tr>
+    <td align="center"><?php echo $value['id']; ?></td>
+    <td align="center"><span ><?php echo $value['title']; ?></span></td>
+    <td align="center"><span ><?php echo $value['href']; ?></span></td>
+    <td align="center"><img src="../view/admin/images/<?php echo $value['on_banner']?'yes':'no'; ?>.gif"  /></td>
+      <td align="center">
+      <a href="bannersedit.php?id=<?php echo $value['id']; ?>" title="编辑"><img src="../view/admin/images/icon_edit.gif" width="16" height="16" border="0" /></a>
+      <a href="bannerstrash.php?act=delete&id=<?php echo $value['id']; ?>"  title="彻底删除" onclick="if(!confirm('确定要彻底删除吗?')){return false;}"><img src="../view/admin/images/no.gif" width="16" height="16" border="0" /></a>
+      </td>
+    <td align="center"><span ><?php echo date("Y-m-d H:i:s", $value['add_time']); ?></span></td>
+  </tr>
+  <?php } ?>
+      </table>
+
+<table id="page-table" cellspacing="0">
+
+</table>
+
+</div>
+</form>
+
+<div id="footer">
+  <?php
+if(isset($_SESSION['username']) && !empty($_SESSION['username']) ){ ?>
+  您好，<font class="f_orange_bold"><?php echo $_SESSION['username']; ?></font>，欢迎您回来！
+  <a href="#">用户中心</a> | <a href="login.php?act=exit">安全退出</a>
+  <?php }else{ ?>
+  欢迎来到后台管理！&nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="login.php">登录</a> | <a href="register.php">注册</a>
+  <?php } ?>
+</div>
+</body>
+</html>

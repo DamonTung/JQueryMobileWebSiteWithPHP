@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>管理中心 - 分类 </title>
+<meta name="robots" content="noindex, nofollow">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0"/>
+<link href="../view/admin/styles/general.css" rel="stylesheet" type="text/css" />
+<link href="../view/admin/styles/main.css" rel="stylesheet" type="text/css" />
+<script type = 'text/javascript' src = '/app/view/js/jquery-1.4.2.min.js'></script>
+</head>
+<body>
+
+<h1>
+<span class="action-span"><a href="cateadd.php">分类</a></span>
+<span class="action-span1"><a href="#">管理中心</a> </span><span id="search_id" class="action-span1"> - 添加分类 </span>
+<div style="clear:both"></div>
+</h1>
+<form method="post" action="" name="listForm">
+<div class="list-div" id="listDiv">
+
+<table width="100%" cellspacing="1" cellpadding="2" id="list-table">
+  <tr>
+    <th>分类名称</th>
+    <th>数量【已下架或被放入回收站的不计入】</th>
+    <th>操作</th>
+  </tr>
+    <?php foreach($catlist as $value){ ?>
+    <tr align="center" class="0" id="0_1" id = 'tr_4'>
+    <td align="left" class="first-cell" style = 'padding-left="1"'>
+            <img src="../view/admin/images/menu_minus.gif" id="icon_0_1" width="9"
+                 height="9" border="0" style="margin-left:<?php echo $value['lev'] ?>em" />
+
+            <span><a href="#" ><?php echo $value['cat_name']; ?></a></span>
+        </td>
+    <td width="10%"><?php echo $cat_goods_count_arr[$value['cat_id']]; ?></td>
+    <td width="24%" align="center">
+      <a href="catedit.php?cat_id=<?php echo $value['cat_id']; ?>">编辑</a> |
+      <a href="catedel.php?cat_id=<?php echo $value['cat_id']; ?>" onclick="if(!confirm('确定要删除吗?')){return false;}" title="移除">移除</a>
+    </td>
+  </tr>
+    <?php } ?>
+  </table>
+</div>
+</form>
+
+<div id="footer">
+  <?php
+if(isset($_SESSION['username']) && !empty($_SESSION['username']) ){ ?>
+  您好，<font class="f_orange_bold"><?php echo $_SESSION['username']; ?></font>，欢迎您回来！
+  <a href="#">用户中心</a> | <a href="login.php?act=exit">安全退出</a>
+  <?php }else{ ?>
+  欢迎来到后台管理！&nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="login.php">登录</a> | <a href="register.php">注册</a>
+  <?php } ?>
+。</div>
+
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>管理中心 - 添加新banner数据 </title>
+    <meta name="robots" content="noindex, nofollow">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0"/>
+    <link href="../view/admin/styles/general.css" rel="stylesheet" type="text/css" />
+    <link href="../view/admin/styles/main.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript">
+
+        function charea(a) {
+            var spans = 'general;
+            var o = document.getElementById(spans[i]+'-tab');
+            var tb = document.getElementById(spans[i]+'-table');
+            o.className = o.id==a+'-tab'?'tab-front':'tab-back';
+            tb.style.display = tb.id==a+'-table'?'block':'none';
+        }
+    </script>
+</head>
+<body>
+
+<h1>
+    <span class="action-span1"><a href="index.php?act=main">管理中心</a> </span><span id="search_id" class="action-span1"> - 添加新数据 </span>
+    <div style="clear:both"></div>
+</h1>
+
+<div class="tab-div">
+    <!-- tab bar -->
+    <div id="tabbar-div">
+        <p>
+            <span class="tab-front" id="general-tab" onclick="charea('general');">通用信息</span>
+        </p>
+    </div>
+    <!-- tab body -->
+    <div id="tabbody-div">
+        <form enctype="multipart/form-data" action="bannersaddAct.php" method="post" name="theForm" >
+            <!-- 最大文件限制 -->
+            <input type="hidden" name="MAX_FILE_SIZE" value="2097152" />
+            <!-- 通用信息 -->
+            <table width="90%" id="general-table" align="center">
+                <tr>
+                    <td>仅显示最新的前五条</td>
+                </tr>
+                <tr>
+                    <td class="label">标题(*)：</td>
+                    <td><input type="text" name="title" value="" style="float:left;color:;" size="30" /></td>
+                </tr>
+                <tr>
+                    <td class="label">链接(*)：</td>
+                    <td><input type="text" name="href" value="" size="30" /></td>
+                </tr>
+                <tr>
+                    <td class="label">上传图片(*)：</td>
+                    <td>
+                        <input type="file" name="img_url" size="35" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label">设置：</td>
+                    <td><input type="checkbox" name="on_banner" checked="checked" value="1"  />上线</td>
+                </tr>
+            </table>
+            <div class="button-div">
+                <input type="hidden" name="id" value="0" />
+                <input type="submit" value=" 确定 " class="button" />
+            </div>
+            <input type="hidden" name="act" value="insert" />
+        </form>
+    </div>
+</div>
+</body>
+</html>

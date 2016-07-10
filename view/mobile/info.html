@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head> 
+	<title></title>
+	<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0"/>
+	<!--<META HTTP-EQUIV="Pragma" CONTENT="no-cache">-->
+	<!--<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">-->
+	<!--<META HTTP-EQUIV="Expires" CONTENT="0">-->
+	<meta charset="UTF-8"/>
+	<script>
+    if(navigator.platform.indexOf('Win32')!=-1){ 
+   //pc
+        //window.location.href='#tip';
+     }else{ 
+   //手机
+        //window.location.href="mobile.html";
+    }
+	</script>
+	<!--<script>-->
+		<!--function rand(url){-->
+			<!--var rand = parseInt(100000*Math.random());-->
+			<!--url = url + '&'-->
+		<!--}-->
+	<!--</script>-->
+	<!--<link rel="stylesheet" href="./view/mobile/css/init.css" />-->
+	<link rel="stylesheet" href="./view/mobile/css/jquery.mobile.min.css" />
+	<link rel="stylesheet" href="./view/mobile/css/theme/theme.min.css" />
+	<link rel="stylesheet" href="./view/mobile/css/styles.css" />
+	<!--<link rel="stylesheet" href="/view/mobile/css/styles-custom.css" />-->
+	<script src="./view/mobile/js/jquery.min.js"></script>
+	<script src="./view/mobile/js/mobileinit.js"></script>
+	<script src="./view/mobile/js/jquery.mobile.min.js"></script>
+	<script src="./view/mobile/js/fastclick.js"></script>
+</head> 
+<body>
+	<!-- page -->
+	<div data-role="page" id="fpmxListPage" data-iscroll="enable">
+		<link rel="stylesheet" href="./view/mobile/css/pull.css" />
+		<script type="text/javascript" charset="utf-8" src="./view/mobile/js/iscroll.js"></script>
+		<script type="text/javascript" charset="utf-8" src="./view/mobile/js/initScroll.js"></script>
+		<script type="text/javascript">
+		$(document).bind("pageinit", function() {
+			isInit= 0;
+			serverURL = "./api/data/?format=html"; //服务器地址，参数传递在initScroll.js里
+			<?php
+					if($cat_id){
+						echo('cat_id = "'.$cat_id.'";');
+					}
+			?>
+			each_page_num = <?php echo($each_page_num); ?>;
+			offset = <?php echo($offset); ?>; //偏移量
+			startNum = <?php echo($page); ?>//当前页
+			count = <?php echo($total_page); ?>; //总页数
+			total_num = <?php echo($total_num); ?>; //总条数
+			<?php
+			if($keywords){
+				echo('keywords = "'.$keywords.'";');
+			}
+			?>
+		});
+		</script>
+
+		<div data-role="panel" id="myPanelFixed" data-position="right" data-position-fixed="true"  data-display="overlay">
+			<a href="#fpmxListPage" data-rel="close" data-icon="backblackL" class="ui-btn ui-btn-inline ui-shadow ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-left ui-btn-inner"></a>
+			<ul data-role="listview" data-theme="a" class="list-fpmx">
+				<?php if(isset($cat_one)){ ?>
+				<li><a href="info.php?keywords=new<?php if(isset($cat_one)){ echo('&cat_id='.$cat_one['cat_id']);}?>" target="_top">该分类下的最新</a></li>
+				<li><a href="info.php?keywords=hot<?php if(isset($cat_one)){ echo('&cat_id='.$cat_one['cat_id']);}?>" target="_top">该分类下的热门</a></li>
+				<li><a href="info.php?keywords=best<?php if(isset($cat_one)){ echo('&cat_id='.$cat_one['cat_id']);}?>" target="_top">该分类下的推荐</a></li>
+				<?php } ?>
+				<?php foreach($sort as $key=>$cat){
+				if($cat['lev']<3){
+				if($cat['lev'] == 1){ ?>
+				<li data-role="list-divider"><a href="info.php?cat_id=<?php echo $cat['cat_id']; ?>" target="_top"><?php echo $cat['cat_name']; ?></a></li>
+				<?php }elseif($cat['lev'] > 1){ ?>
+				<li><a href="info.php?cat_id=<?php echo $cat['cat_id']; ?>" target="_top"><?php echo $cat['cat_name']; ?></a></li>
+				<?php }}} ?>
+			</ul>
+		</div>
+
+<div data-role="header" data-id="myHeader" data-position="fixed"  data-tap-toggle="false">
+	<h2><?php
+	if(isset($cat_one)){
+	echo($cat_one['cat_name']);
+	}else{
+	echo($title);
+	} ?>
+	</h2>
+	<a data-icon="back" data-rel="back" data-iconpos="notext" data-direction="reverse"></a>
+	<!--<a href="./index.php" data-icon="home" data-iconpos="notext" class="ui-btn-right">-->
+	<a href="#myPanelFixed" data-icon="bars" data-iconpos="notext" class="ui-btn-right">
+	</a>
+</div>
+<!-- content-->
+<div data-role="content" >
+	<div id="wrapperIndex" class="wrapper" >
+		<div id="scrollerIndex" class="scroller">
+			<div id="pullDown" >
+				<span class="pullDownIcon"></span><span class="pullDownLabel">下拉刷新...</span>
+			</div>
+			<!--<div style="margin: 10px 0px; padding:5px;">-->
+				<!--<b>2013/5/17<span style="margin:0 10px;">~</span>2013/5/17</b>-->
+				<!--<div class="navbar" style="height: 1px; margin-top: 5px"></div>-->
+			<!--</div>-->
+			<ul data-role="listview" data-theme="a" class="list-fpmx" id="fpmxList">
+				<?php foreach($infos as $k=>$v){  ?>
+				<li>
+					<a href="<?php echo('one.php?id='.$v['id']); ?>">
+						<img src="<?php echo $v['img_url_120x80']; ?>" alt="">
+						<h2><?php echo($v['name']); ?></h2>
+						<h3><?php echo($v['info1']); ?></h3>
+						<p><span class="text-no"><?php echo($v['info2']); ?></span></p>
+						<p><span class="text-no"><?php echo($v['info3']); ?></span></p>
+					</a>
+					<p class="desc-normal"><span class="left-aside"><?php echo($v['info4']); ?></span></span></p>
+				</li>
+				<?php } ?>
+			</ul>
+			<div id="pullUp">
+				<span class="pullUpIcon"></span><span class="pullUpLabel_info" id="pullUpLabel_info">上拉加载更多...</span>
+			</div>
+
+		</div>
+	</div>
+</div>
+		<div data-role="footer" data-position="fixed" data-id="footernav">
+			<div data-role="navbar">
+				<ul>
+					<li><a href="./index.php" target="_top">首页</a></li>
+					<li><a href="./info.php?keywords=new" target="_top">最新</a></li>
+					<li><a href="./info.php?keywords=hot" target="_top">热门</a></li>
+					<li><a href="./info.php?keywords=best" target="_top">推荐</a></li>
+				</ul>
+			</div>
+		</div>
+
+	</div>
+</body>
+</html>

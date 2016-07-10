@@ -1,0 +1,122 @@
+<!-- $Id: goods_info.htm 17126 2010-04-23 10:30:26Z liuhui $ -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>管理中心 - 添加新数据 </title>
+<meta name="robots" content="noindex, nofollow">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0"/>
+<link href="../view/admin/styles/general.css" rel="stylesheet" type="text/css" />
+<link href="../view/admin/styles/main.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+
+function charea(a) {
+    var spans = ['general','detail'];
+    for(i=0;i<2;i++) {
+        var o = document.getElementById(spans[i]+'-tab');
+        var tb = document.getElementById(spans[i]+'-table');
+        o.className = o.id==a+'-tab'?'tab-front':'tab-back';
+        tb.style.display = tb.id==a+'-table'?'block':'none';
+    }
+
+}
+</script>
+</head>
+<body>
+
+<h1>
+<span class="action-span"><a href="goodslist.php?act=list">数据列表</a></span>
+<span class="action-span1"><a href="index.php?act=main">管理中心</a> </span><span id="search_id" class="action-span1"> - 添加新数据 </span>
+<div style="clear:both"></div>
+</h1>
+
+<!-- start goods form -->
+<div class="tab-div">
+    <!-- tab bar -->
+    <div id="tabbar-div">
+      <p>
+        <span class="tab-front" id="general-tab" onclick="charea('general');">通用信息</span>
+        <span class="tab-back" id="detail-tab" onclick="charea('detail');">详细描述</span>
+      </p>
+    </div>
+    <!-- tab body -->
+    <div id="tabbody-div">
+        <img src="../view/admin/images/tips.jpg" alt="" />
+      <form enctype="multipart/form-data" action="goodsaddAct.php" method="post" name="theForm" >
+        <!-- 最大文件限制 -->
+        <input type="hidden" name="MAX_FILE_SIZE" value="2097152" />
+        <!-- 通用信息 -->
+        <table width="90%" id="general-table" align="center">
+		<tr>
+            <td class="label">分类(*)：</td>
+            <td>
+              <select name="cat_id"  >
+              <option value="0">请选择</option>
+              <?php foreach($catlist as $value){ ?>
+              <option value="<?php echo $value['cat_id']; ?>">
+                <?php echo str_repeat('&nbsp;&nbsp;',$value['lev']).'├'.$value['cat_name']; ?>
+              </option><?php } ?>
+              </select>
+             </td>
+          </tr>
+          <tr>
+            <td class="label">标题(*)：</td>
+            <td><input type="text" name="name" value="" style="float:left;color:;" size="30" /></td>
+          </tr>
+            <tr>
+            <td class="label">信息1(*)：</td>
+            <td><input type="text" name="info1" value="" size="30" /></td>
+          </tr>
+            <tr>
+                <td class="label">信息2(*)：</td>
+                <td><input type="text" name="info2" value="" size="30" /></td>
+            </tr>
+            <tr>
+                <td class="label">信息3：</td>
+                <td><input type="text" name="info3" value="" size="30" /></td>
+            </tr>
+            <tr>
+                <td class="label">信息4(*)：</td>
+                <td><input type="text" name="info4" value="" size="30" /></td>
+            </tr>
+            <tr>
+            <td class="label">上传图片(*)：</td>
+            <td>
+                <input type="file" name="img_url" size="35" /><br/>
+            </td>
+          </tr>
+            <tr>
+                <td class="label">设置：</td>
+                <td><input type="checkbox" name="is_best" value="1"  />推荐 <input type="checkbox" name="is_new" value="1"  />最新 <input type="checkbox" name="is_hot" value="1"  />热门</td>
+            </tr>
+            <tr id="alone_sale_1">
+                <td class="label" id="alone_sale_2">上架：</td>
+                <td id="alone_sale_3"><input type="checkbox" name="is_on_sale" value="1" checked="checked" /> 打勾表示允许销售，否则不允许销售。</td>
+            </tr>
+        </table>
+
+        <!-- 详细描述 -->
+        <table width="90%" id="detail-table" style="display:none">
+          <tr>
+            <td><textarea id="details" name="details"></textarea></td>
+          </tr>
+        </table>
+        <div class="button-div">
+          <input type="hidden" name="goods_id" value="0" />
+                    <input type="submit" value=" 确定 " class="button" />
+        </div>
+        <input type="hidden" name="act" value="insert" />
+      </form>
+    </div>
+</div>
+<script type="text/javascript" src="../lib/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="../lib/ueditor/ueditor.all.min.js"></script>
+<script type="text/javascript">
+  window.UEDITOR_HOME_URL = "../lib/ueditor/";
+  var edit = new UE.ui.Editor({initialContent:'',initialFrameWidth:800,initialFrameHeight:250});
+  edit.render("details");
+</script>
+<!-- end goods form -->
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>ECSHOP 管理中心</title>
+<meta name="robots" content="noindex, nofollow">
+  <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="../view/admin/styles/general.css" rel="stylesheet" type="text/css" />
+<link href="../view/admin/styles/main.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="footer">
+  <?php
+if(isset($_SESSION['username']) && !empty($_SESSION['username']) ){ ?>
+  您好，<font class="f_orange_bold"><?php echo $_SESSION['username']; ?></font>，欢迎您回来！
+  <a href="../member.php">用户中心</a> | <a href="../login.php?act=exit">安全退出</a>
+  <?php }else{ ?>
+  欢迎来到后台管理！&nbsp;&nbsp;&nbsp;&nbsp;
+  <a href=".../login.php">登录</a> | <a href=".../register.php">注册</a>
+  <?php } ?>
+</div>
+
+</body>
+</html>

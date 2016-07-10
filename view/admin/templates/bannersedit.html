@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>管理中心 - 修改banner数据 </title>
+<meta name="robots" content="noindex, nofollow">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0"/>
+<link href="../view/admin/styles/general.css" rel="stylesheet" type="text/css" />
+<link href="../view/admin/styles/main.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+
+function charea(a) {
+    var spans = 'general';
+    var o = document.getElementById(spans[i]+'-tab');
+    var tb = document.getElementById(spans[i]+'-table');
+    o.className = o.id==a+'-tab'?'tab-front':'tab-back';
+    tb.style.display = tb.id==a+'-table'?'block':'none';
+}
+</script>
+</head>
+<body>
+
+<h1>
+<span class="action-span1"><a href="index.php?act=main">管理中心</a> </span><span id="search_id" class="action-span1"> - 修改数据 </span>
+<div style="clear:both"></div>
+</h1>
+
+<!-- start banner form -->
+<div class="tab-div">
+    <!-- tab bar -->
+    <div id="tabbar-div">
+      <p>
+        <span class="tab-front" id="general-tab" onclick="charea('general');">通用信息</span>
+      </p>
+    </div>
+
+    <!-- tab body -->
+    <div id="tabbody-div">
+      <form enctype="multipart/form-data" action="bannerseditAct.php" method="post" name="theForm" >
+        <!-- 最大文件限制 -->
+        <input type="hidden" name="MAX_FILE_SIZE" value="2097152" />
+        <!-- 通用信息 -->
+        <table width="90%" id="general-table" align="center">
+            <tr>
+                <td class="label">标题(*)：</td>
+                <td><input type="text" name="title" value="<?php echo $banner['title']; ?>" style="float:left;color:;" size="30" /></td>
+            </tr>
+            <tr>
+                <td class="label">链接(*)：</td>
+                <td><input type="text" name="href" value="<?php echo $banner['href']; ?>" size="30" /></td>
+            </tr>
+            <tr>
+                <td class="label">上传图片(*需重新上传)：</td>
+                <td>
+                    已上传的图片：<img src="<?php echo '../'.$banner['img_url_120x80']; ?>" /><br/>
+                    <input type="hidden" name="img_url_link" value="<?php echo $banner['img_url']; ?>" /><br/>
+                    我要重新上传：<input type="file" name="img_url" size="35" /><br/>
+                </td>
+            </tr>
+            <tr>
+                <td class="label">设置：</td>
+                <td><input type="checkbox" name="on_banner" value="1" <?php if($banner['on_banner'] == 1){echo 'checked="checked"';} ?> />上线</td>
+            </tr>
+        </table>
+          <div class="button-div">
+          <input type="hidden" name="id" value="<?php echo $banner['id']; ?>" />
+                    <input type="submit" value=" 确定 " class="button" />
+        </div>
+        <input type="hidden" name="act" value="update" />
+      </form>
+    </div>
+</div>
+
+</body>
+</html>

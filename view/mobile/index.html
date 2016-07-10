@@ -1,0 +1,168 @@
+<!DOCTYPE html> 
+<html>
+<head> 
+	<title></title>
+	<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0"/>
+	<!--<META HTTP-EQUIV="Pragma" CONTENT="no-cache">-->
+	<!--<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">-->
+	<!--<META HTTP-EQUIV="Expires" CONTENT="0">-->
+	<meta charset="UTF-8"/>
+	<script>
+    if(navigator.platform.indexOf('Win32')!=-1){ 
+   //pc
+        //window.location.href='#tip';
+     }else{ 
+   //手机
+        //window.location.href="mobile.html";
+    }
+	</script>
+	<!--<link rel="stylesheet" href="./view/mobile/css/init.css" />-->
+	<link rel="stylesheet" type="text/css" href="./view/mobile/css/jquery.mobile.min.css" />
+	<link rel="stylesheet" type="text/css" href="./view/mobile/css/theme/theme.min.css" />
+	<link rel="stylesheet" type="text/css" href="./view/mobile/css/styles.css" />
+	<link rel="stylesheet" type="text/css" href="./view/mobile/css/imgslide.css" />
+	<link rel="stylesheet" type="text/css" href="./view/mobile/css/mobile.css" />
+	<link rel="stylesheet" type="text/css" href="./view/mobile/css/Font-Awesome-3.2.1/css/font-awesome.min.css" />
+	<!--[if IE 7]>
+	<link rel="stylesheet" href="./view/mobile/css/Font-Awesome-3.2.1/css/font-awesome-ie7.min.css">
+	<![endif]-->
+	<!-- <link rel="stylesheet" href="css/styles-custom.css" /> -->
+	<script src="./view/mobile/js/jquery.min.js"></script>
+	<script src="./view/mobile/js/mobileinit.js"></script>
+	<script src="./view/mobile/js/jquery.mobile.min.js"></script>
+
+</head> 
+<body>
+	<div data-role="page" id="fpmxListPage" data-iscroll="enable">
+		<link rel="stylesheet" href="./view/mobile/css/pull.css" />
+		<script type="text/javascript" charset="utf-8" src="./view/mobile/js/iscroll.js"></script>
+		<script type="text/javascript" charset="utf-8" src="./view/mobile/js/initScroll.js"></script>
+<div data-role="header" data-id="myHeader" data-position="fixed"  data-tap-toggle="false">
+	<h2>首页</h2>
+	<a data-icon="back" data-rel="back" data-iconpos="notext" data-direction="reverse"></a>
+	<a href="#myPanelFixed" data-icon="bars" data-iconpos="notext" class="ui-btn-right"></a>
+</div>
+<div data-role="panel" id="myPanelFixed" data-position="right" data-position-fixed="true"  data-display="overlay">
+	<a href="#fpmxListPage" data-rel="close" data-icon="backblackL" class="ui-btn ui-btn-inline ui-shadow ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-left ui-btn-inner"></a>
+	<ul data-role="listview" data-theme="a" class="list-fpmx">
+		<?php foreach($sort as $key=>$cat){
+		if($cat['lev']<3){
+		if($cat['lev'] == 1){ ?>
+		<li data-role="list-divider"><a href="info.php?cat_id=<?php echo $cat['cat_id']; ?>"><?php echo $cat['cat_name']; ?></a></li>
+		<?php }elseif($cat['lev'] > 1){ ?>
+		<li><a href="info.php?cat_id=<?php echo $cat['cat_id']; ?>" target="_top"><?php echo $cat['cat_name']; ?></a></li>
+		<?php }}} ?>
+	</ul>
+</div>
+<!-- content-->
+<div data-role="content" class="play_content">
+	<div id="wrapperIndex" class="wrapper" >
+		<div id="scrollerIndex" class="scroller">
+			<div id="pullDown" >
+				<span class="pullDownIcon"></span><span class="pullDownLabel">下拉刷新...</span>
+			</div>
+			<div class="play">
+				<ul>
+					<li class="textbg"></li>
+					<li class="text"></li>
+					<li class="num" >
+						<?php for($i=1;$i<=$banner_count;$i++){ ?>
+						<a><?php echo $i; ?></a>
+						<?php } ?>
+					</li>
+					<li class="img_content">
+						<?php foreach($banner_list as $k=>$v){ ?>
+						<a href="<?php echo $v['href']; ?>" ><img src="<?php echo $v['img_url']; ?>" alt="<?php echo $v['title']; ?>" /></a>
+						<?php } ?>
+					</li>
+				</ul>
+			</div>
+			<div id="tianzige">
+
+				<div class="row-container">
+					<a href="./info.php?keywords=best" target="_top" class="header">
+						<div class="left hot">
+							<span class="icon-thumbs-up"></span>
+							<span>热门推荐</span>
+						</div>
+						<div class="right">
+							<span class="icon-spinner"></span>
+							<span>更多</span>
+						</div>
+					</a>
+					<ul class="content-wrapper">
+						<?php foreach($randbestlist4 as $k=>$v){?><!--这里有个坑，li之间不能换行不然会被挤下去--><li class="content-list">
+							<a class="item" href="./one.php?id=<?php echo $v['id']; ?>">
+								<div class="top" data-img="<?php echo $v['img_url_350x220']; ?>" loaded="loaded"><div class="cover-img" style="opacity: 1; background-image: url(<?php echo $v['img_url_350x220']; ?>);"></div></div>
+							</a>
+							<a class="info" href="./one.php?id=<?php echo $v['id']; ?>">
+								<div class="title"><?php echo $v['name']; ?></div>
+								<div class="meta clearfix">
+									<div class="cell left">
+										<span class="icon-eye-open"></span>
+										<span><?php echo $v['access_amount']; ?></span>
+									</div>
+									<div class="cell left">
+										<span class="icon-time"></span>
+										<span><?php echo date("m/d", $v['add_time']); ?></span>
+									</div>
+								</div>
+							</a>
+						</li><!--这里有个坑，li之间不能换行不然会被挤下去--><?php } ?>
+					</ul>
+				</div>
+
+			<?php foreach($sons as $sonk=>$sonv){ ?>
+				<div class="row-container">
+					<a href="./info.php?cat_id=<?php echo $sonv['cat_id']; ?>" target="_top" class="header">
+						<div class="left hot">
+							<span class="icon-chevron-right"></span>
+							<span><?php echo $sonv['cat_name']; ?></span>
+						</div>
+						<div class="right">
+							<span class="icon-spinner"></span>
+							<span>更多</span>
+						</div>
+					</a>
+					<ul class="content-wrapper">
+						<?php foreach($cat_data[$sonk] as $cat_datak=>$cat_datav){ ?><!--这里有个坑，li之间不能换行不然会被挤下去--><li class="content-list">
+						<a class="item" href="./one.php?id=<?php echo $cat_datav['id']; ?>">
+							<div class="top" data-img="<?php echo $v['img_url_350x220']; ?>" loaded="loaded"><div class="cover-img" style="opacity: 1; background-image: url(<?php echo $cat_datav['img_url_350x220']; ?>);"></div></div>
+						</a>
+						<a class="info" href="./one.php?id=<?php echo $cat_datav['id']; ?>">
+							<div class="title"><?php echo $cat_datav['name']; ?></div>
+							<div class="meta clearfix">
+								<div class="cell left">
+									<span class="icon-eye-open"></span>
+									<span><?php echo $cat_datav['access_amount']; ?></span>
+								</div>
+								<div class="cell left">
+									<span class="icon-time"></span>
+									<span><?php echo date("m/d", $cat_datav['add_time']); ?></span>
+								</div>
+							</div>
+						</a>
+					</li><!--这里有个坑，li之间不能换行不然会被挤下去--><?php } ?>
+					</ul>
+				</div>
+				<?php } ?>
+			</div>
+			<div id="pullUp">
+			</div>
+		</div>
+	</div>
+</div>
+		<div data-role="footer" data-position="fixed" data-id="footernav">
+			<div data-role="navbar">
+				<ul>
+					<li><a href="./index.php" target="_top" >首页</a></li>
+					<li><a href="./info.php?keywords=new" target="_top">最新</a></li>
+					<li><a href="./info.php?keywords=hot" target="_top">热门</a></li>
+					<li><a href="./info.php?keywords=best" target="_top">推荐</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</body>
+<script src="./view/mobile/js/imgslide.js"></script>
+</html>
