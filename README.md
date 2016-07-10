@@ -1,0 +1,2 @@
+# JQueryMobileWebSiteWithPHP
+JQueryMobile前端&amp;PHP后台的动态手机网站
