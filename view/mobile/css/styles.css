@@ -1,6 +1,4 @@
-img{
-    max-width: 100%;
-}
+img{ max-width: 100%;}
 /**   固定样式    */
 .ui-footer .ui-btn .ui-btn-inner { padding-top: 5px !important; }
 .ui-footer .ui-btn .ui-icon{ width: 30px!important; height: 30px!important;margin-top: -3px!important;margin-left: -15px !important; box-shadow: none!important; -moz-box-shadow: none!important; -webkit-box-shadow: none!important; -webkit-border-radius: 0 !important; border-radius: 0 !important; }

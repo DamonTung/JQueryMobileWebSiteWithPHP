@@ -77,10 +77,11 @@ function isMobile()
 }
 
 if(true){ //  用isMobile()判断用户使用的是不是手机  此处直接true以方便调试
-    $img_css = '';
-    if(isMobile()){
-      $img_css = '<style>img{ max-width: 100%; }</style>';//如果是手机，给每个img标签都添加这个属性
-    }
+    //$img_css = '';
+    //if(isMobile()){
+    //  $img_css = '<style>img{ max-width: 100%; }</style>';//如果是手机，给每个img标签都添加这个属性
+    //}
+	/*<?php if(isset($img_css)){echo $img_css;} ?>*/
     $fields = array(
         'id'
     );
