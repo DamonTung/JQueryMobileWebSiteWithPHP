@@ -62,7 +62,7 @@ class CatModel extends Model{
      * return $id栏目下的子栏目
      */
     public function getSon($id){
-        $sql = 'select cat_id,cat_name,parent_id from '.$this->table.' where parent_id='.$id;
+        $sql = 'select cat_id,cat_name,parent_id from '.$this->table.' where parent_id='.$id.' order by cat_id asc';
         return $this->db->getAll($sql);
     }
 
